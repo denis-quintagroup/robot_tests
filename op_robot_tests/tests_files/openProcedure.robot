@@ -593,7 +593,7 @@ ${ITEM_MEAT}        ${True}
   ...      tender_owner
   ...      ${USERS.users['${tender_owner}'].broker}
   ...      modify_auction_procuringEntity_name
-  [Setup]  Дочекатись дати закінчення періоду редагування лоту  ${tender_owner}  ${TENDER['TENDER_UAID']}
+  [Setup]  Дочекатись синхронізації з майданчиком  ${tender_owner}
   ${new_procuringEntity_name}=  create_fake_sentence
   Set To Dictionary  ${USERS.users['${tender_owner}']}  new_procuringEntity_name=${new_procuringEntity_name}
   Можливість змінити поле procuringEntity.name тендера на ${new_procuringEntity_name}
@@ -1366,7 +1366,7 @@ ${ITEM_MEAT}        ${True}
   [Tags]   ${USERS.users['${viewer}'].broker}: Відображення відповіді на запитання
   ...      viewer
   ...      ${USERS.users['${viewer}'].broker}
-  ...      answer_question_to_tender
+  ...      answer_question_to_tender_view
   [Setup]  Дочекатись синхронізації з майданчиком  ${viewer}
   Звірити відображення поля answer запитання на тендер для користувача ${viewer}
 

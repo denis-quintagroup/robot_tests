@@ -229,7 +229,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     for period_name in periods:
         period_dict[period_name + "Period"] = {}
         for i, j in zip(range(2), ("start", "end")):
-            inc_dt += timedelta(minutes=params['intervals'][period_name][i])
+            inc_dt += timedelta(days=params['intervals'][period_name][i])
             period_dict[period_name + "Period"][j + "Date"] = inc_dt.isoformat()
     data.update(period_dict)
 
@@ -246,8 +246,8 @@ def test_question_data():
     })
 
 
-def test_related_question(question, relation, obj_id):
-    question.data.update({"questionOf": relation, "relatedItem": obj_id})
+def test_related_question(question, tender, obj_id):
+    question.data.update({"questionOf": tender, "relatedItem": obj_id})
     return munchify(question)
 
 
@@ -377,6 +377,10 @@ def test_tender_data_dgf_geb(params):
     for i in range(params['number_of_items']):
         data['items'].pop()
 
+    url = params['api_host_url']
+    if url == 'https://lb.api.ea2.openprocurement.net':
+        del data['procurementMethodDetails']
+
     scheme = random.choice([u'UA-EDR', u'UA-MFO', u'accountNumber'])
     scheme_id = create_fake_scheme_id(scheme)
 
@@ -412,7 +416,7 @@ def test_tender_data_dgf_geb(params):
     period_dict = {}
     inc_dt = get_now()
     period_dict["auctionPeriod"] = {}
-    inc_dt += timedelta(minutes=params['intervals']['auction'][0])
+    inc_dt += timedelta(days=params['intervals']['auction'][0])
     period_dict["auctionPeriod"]["startDate"] = inc_dt.isoformat()
     data.update(period_dict)
 
