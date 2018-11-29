@@ -593,7 +593,7 @@ ${ITEM_MEAT}        ${True}
   ...      tender_owner
   ...      ${USERS.users['${tender_owner}'].broker}
   ...      modify_auction_procuringEntity_name
-  [Setup]  Дочекатись дати закінчення періоду редагування лоту  ${tender_owner}  ${TENDER['TENDER_UAID']}
+  [Setup]  Дочекатись синхронізації з майданчиком  ${viewer}
   ${new_procuringEntity_name}=  create_fake_sentence
   Set To Dictionary  ${USERS.users['${tender_owner}']}  new_procuringEntity_name=${new_procuringEntity_name}
   Можливість змінити поле procuringEntity.name тендера на ${new_procuringEntity_name}

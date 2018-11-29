@@ -179,7 +179,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
 
     data = {
         "mode": "test",
-        "submissionMethodDetails": "quick",
+        # "submissionMethodDetails": "quick",
         "description": fake.description(),
         "description_en": fake_en.sentence(nb_words=10, variable_nb_words=True),
         "description_ru": fake_ru.sentence(nb_words=10, variable_nb_words=True),
@@ -205,13 +205,12 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     }
 
     accelerator = params['intervals']['accelerator']
-    data['procurementMethodDetails'] = 'quick, ' \
-                                       'accelerator={}'.format(accelerator)
+    # data['procurementMethodDetails'] = 'quick'
 
     data["procuringEntity"]["kind"] = "other"
 
     data['rectificationPeriod'] = {
-        "endDate": (get_now() + timedelta(minutes=(random.randint(5, 19) * 1440) / accelerator)).isoformat(),
+        "endDate": (get_now() + timedelta(days=(random.randint(5, 19) * 1440) / accelerator)).isoformat(),
     }
 
     scheme_group = fake.scheme_other()[:4]
@@ -229,7 +228,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     for period_name in periods:
         period_dict[period_name + "Period"] = {}
         for i, j in zip(range(2), ("start", "end")):
-            inc_dt += timedelta(minutes=params['intervals'][period_name][i])
+            inc_dt += timedelta(days=params['intervals'][period_name][i])
             period_dict[period_name + "Period"][j + "Date"] = inc_dt.isoformat()
     data.update(period_dict)
 
@@ -412,7 +411,7 @@ def test_tender_data_dgf_geb(params):
     period_dict = {}
     inc_dt = get_now()
     period_dict["auctionPeriod"] = {}
-    inc_dt += timedelta(minutes=params['intervals']['auction'][0])
+    inc_dt += timedelta(days=params['intervals']['auction'][0])
     period_dict["auctionPeriod"]["startDate"] = inc_dt.isoformat()
     data.update(period_dict)
 
