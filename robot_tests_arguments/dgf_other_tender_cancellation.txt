@@ -1,4 +1,4 @@
--v MODE:dgfOtherAssets
+-v MODE:appraisal.insider
 
 -v minNumberOfQualifiedBids:2
 

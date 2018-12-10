@@ -85,6 +85,19 @@ def create_fake_cancellation_reason():
     return random.choice(reasons)
 
 
+def create_fake_scheme_id(scheme):
+    scheme_id = {
+            u'UA-MFO': random.randint(100000, 999999),
+            u'UA-EDR': random.randint(10000000, 99999999),
+            u'accountNumber': random.randint(1000000000, 9999999999)
+    }
+    return scheme_id[scheme]
+
+
+def create_fake_bankName():
+    return random.choice([u'PrivatBank', u'Oschadbank', u'Raiffeisen Bank Aval', u'KredoBank', u'ProCredit Bank'])
+
+
 def field_with_id(prefix, sentence):
     return u"{}-{}: {}".format(prefix, fake.uuid4()[:8], sentence)
 
@@ -318,4 +331,57 @@ def test_tender_data_dgf_other(params):
         scheme_group_other = fake.scheme_other()[:4]
         new_item = test_item_data(scheme_group_other)
         data['items'].append(new_item)
+    return data
+
+
+def test_tender_data_insider(params):
+    data = test_tender_data(params, [])
+
+    data['lotIdentifier'] = fake.dgfID()
+    data['tenderAttempts'] = fake.random_int(min=1, max=8)
+    data['auctionParameters'] = {
+            'type': 'insider',
+            'dutchSteps': random.choice([random.randrange(10, 90, 10), 99])
+            }
+    scheme = random.choice([u'UA-EDR', u'UA-MFO', u'accountNumber'])
+    scheme_id = create_fake_scheme_id(scheme)
+    data["registrationFee"] = {
+            "amount": create_fake_guarantee(data['value']['amount']),
+            "currency": u"UAH"
+            }
+    data["bankAccount"] = {
+            "description": fake.description(),
+            "bankName": create_fake_bankName(),
+            "accountIdentification": [{
+                "scheme": scheme,
+                "id": scheme_id,
+                "description": fake.description()
+                }]
+            }
+    del data['minimalStep']
+    del data['rectificationPeriod']
+
+    for i in range(params['number_of_items']):
+        data['items'].pop()
+
+    url = params['api_host_url']
+
+    # TODO: handle this magic string
+    if url == 'https://lb.api.ea.openprocurement.org':
+        del data['procurementMethodDetails']
+
+    period_dict = {}
+    inc_dt = get_now()
+    period_dict["auctionPeriod"] = {}
+    inc_dt += timedelta(minutes=params['intervals']['auction'][0])
+    period_dict["auctionPeriod"]["startDate"] = inc_dt.isoformat()
+    data.update(period_dict)
+
+    data['procurementMethodType'] = 'appraisal.insider'
+
+    scheme_group = fake.scheme_other()[:3]
+    for i in range(params['number_of_items']):
+        new_item = test_item_data(scheme_group)
+        data['items'].append(new_item)
+
     return data

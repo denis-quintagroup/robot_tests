@@ -39,12 +39,15 @@ from .initial_data import (
     test_supplier_data,
     test_tender_data,
     test_tender_data_dgf_other,
+    test_tender_data_insider,
     create_fake_tenderAttempts,
     create_fake_dgfID,
     convert_days_to_seconds,
     create_fake_title,
-    create_fake_description
-
+    create_fake_description,
+    create_fake_scheme_id,
+    create_fake_bankName,
+    test_tender_data_insider
 )
 from barbecue import chef
 from restkit import request
@@ -333,6 +336,8 @@ def prepare_test_tender_data(procedure_intervals, tender_parameters):
         "Accelerator should not be less than 0"
     if mode == 'dgfOtherAssets':
         return munchify({'data': test_tender_data_dgf_other(tender_parameters)})
+    if mode == 'appraisal.insider':
+        return munchify({'data': test_tender_data_insider(tender_parameters)})
     raise ValueError("Invalid mode for prepare_test_tender_data")
 
 
