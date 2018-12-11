@@ -339,10 +339,10 @@ def test_tender_data_insider(params):
 
     data['lotIdentifier'] = fake.dgfID()
     data['tenderAttempts'] = fake.random_int(min=1, max=8)
-    data['auctionParameters'] = {
-            'type': 'insider',
-            'dutchSteps': random.choice([random.randrange(10, 90, 10), 99])
-            }
+    # data['auctionParameters'] = {
+    #         'type': 'insider',
+    #         'dutchSteps': random.choice([random.randrange(10, 90, 10), 99])
+    #         }
     scheme = random.choice([u'UA-EDR', u'UA-MFO', u'accountNumber'])
     scheme_id = create_fake_scheme_id(scheme)
     data["registrationFee"] = {
