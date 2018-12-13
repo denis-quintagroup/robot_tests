@@ -108,6 +108,12 @@ Resource           resource.robot
   Remove File  ${file_path}
 
 
+Можливість змінити поле ${field_name} предмета на ${field_value}
+  ${item_id}=  get_id_from_object  ${USERS.users['${tender_owner}'].tender_data.data['items'][0]}
+  Set To Dictionary  ${USERS.users['${tender_owner}']}  item_id=${item_id}
+  Run As  ${tender_owner}  Внести зміни в предмет  ${item_id}  ${TENDER['TENDER_UAID']}  ${field_name}  ${field_value}
+
+
 Неможливість редагувати документ
   [Arguments]  ${username}  ${tender_uaid}
   ${tender}=  openprocurement_client.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}

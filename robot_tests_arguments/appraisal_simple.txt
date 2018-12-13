@@ -1,0 +1,45 @@
+-v MODE:appraisal.insider
+
+-v minNumberOfQualifiedBids:2
+
+-v NUMBER_OF_ITEMS:3
+
+-v NUMBER_OF_AWARDS:2
+
+-i create_tender
+-i find_tender
+-i tender_view
+-i tender_view_tenderPeriod
+-i tender_view_contractPeriod
+-i tender_view_unit_code
+-i tender_view_tenderAttempts
+-i modify_auction_value_tax
+
+
+-i make_bid_by_provider
+-i auction_url
+
+
+-i auction
+-i make_bid_by_provider1_after_dutch
+-i make_bid_by_provider1_during_sealedbid
+-i make_bid_by_dutch_winner
+-i auction_end
+
+#-----------awarding-----------#
+-i awarding
+-i first_award_pending_status
+-i add_protocol_to_first_award
+-i confirm_first_award
+-i first_award_active_status
+-i cancel_contract
+-i second_award_pending_status
+-i add_protocol_to_second_award
+-i confirm_second_award
+-i second_award_active_status
+
+#-----------contract signing-----------#
+-i dateSigned
+-i contract_sign_upload
+-i contract_sign
+-i tender_status_complete

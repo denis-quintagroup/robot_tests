@@ -1,4 +1,4 @@
--v MODE:dgfOtherAssets
+-v MODE:appraisal.insider
 
 -v minNumberOfQualifiedBids:2
 
@@ -9,6 +9,7 @@
 -i tender_view_dgfID
 -i tender_view
 -i tender_view_min_step
+-i tender_view_minimalStep
 -i tender_view_tenderPeriod
 -i modify_auction_value_tax
 -i make_bid_by_provider

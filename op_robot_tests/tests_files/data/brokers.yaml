@@ -37,7 +37,7 @@ Default:
             auction:  [25, 30]
         appraisal.insider:
             accelerator: 1440
-            auction:  [18, 30]
+            auction:  [5, 30]
     # Synchronization delay, in seconds
     timeout_on_wait: 300
 Quinta:

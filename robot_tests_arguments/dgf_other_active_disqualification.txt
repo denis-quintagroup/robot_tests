@@ -7,7 +7,9 @@
 -i create_tender
 -i find_tender
 -i tender_view_dgfID
+-i tender_view_minimalStep
 -i tender_view_min_bids_number
+-i tender_rectificationPeriod
 -i tender_view
 -i tender_view_tenderPeriod
 -i tender_view_unit_code
