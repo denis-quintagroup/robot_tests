@@ -27,6 +27,7 @@ Library  openprocurement_client.utils
   Log  ${ds_host_url}
   ${auth_ds_all}=  get variable value  ${USERS.users.${username}.auth_ds}
   ${auth_ds}=  set variable  ${auth_ds_all.${resource}}
+  Set List Value  ${auth_ds}  -1  ${ds_key}
   Log  ${auth_ds}
 
 #  Uncomment this line if there is need to precess files operations without DS.
