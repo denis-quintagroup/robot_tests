@@ -39,9 +39,28 @@
 -i delete_item
 
 
+-i add_tender_doc
+-i add_tender_illustration
+-i add_tender_notice
+-i add_tender_tech_specifications
+-i add_tender_evaluationCriteria
+-i add_tender_contractProforma
+-i add_tender_asset_familiarization
+-i add_tender_presentation
+-i add_tender_clarifications
+-i add_tender_billOfQuantity
+-i add_tender_conflictOfInterest
+-i add_tender_evaluationReports
+-i add_tender_eligibilityCriteria
+-i add_tender_x_financialLicense
+-i add_tender_x_virtualDataRoom
+-i add_tender_x_nda
+-i add_tender_x_qualificationDocuments
+-i add_tender_cancellationDetails
+
+
 -i ask_question_to_tender
 -i answer_question_to_tender
-
 
 
 -i make_bid_by_provider
