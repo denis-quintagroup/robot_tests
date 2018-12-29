@@ -27,13 +27,14 @@ Library  openprocurement_client.utils
   Log  ${ds_host_url}
   ${auth_ds_all}=  get variable value  ${USERS.users.${username}.auth_ds}
   ${auth_ds}=  set variable  ${auth_ds_all.${resource}}
+  Set List Value  ${auth_ds}  -1  ${ds_key}
   Log  ${auth_ds}
 
 #  Uncomment this line if there is need to precess files operations without DS.
 # ${ds_api_wraper}=  set variable  ${None}
   ${ds_api_wraper}=  prepare_ds_api_wrapper  ${ds_host_url}  ${auth_ds}
 
-  ${api_wrapper}=  prepare_api_wrapper  ${USERS.users['${username}'].api_key}  ${resource}  ${api_host_url}  ${api_version}  ${ds_api_wraper}
+  ${api_wrapper}=  prepare_api_wrapper  ${api_key}  ${resource}  ${api_host_url}  ${api_version}  ${ds_api_wraper}
   Set To Dictionary  ${USERS.users['${username}']}  client=${api_wrapper}
   Set To Dictionary  ${USERS.users['${username}']}  access_token=${EMPTY}
   ${id_map}=  Create Dictionary
@@ -278,6 +279,12 @@ Library  openprocurement_client.utils
 ##############################################################################
 #             Item operations
 ##############################################################################
+
+Отримати інформацію із об'єкта МП
+  [Arguments]  ${username}  ${tender_uaid}  ${field_name}
+  ${field_value}=  openprocurement_client.Отримати інформацію із тендера  ${username}  ${tender_uaid}  ${field_name}
+  [return]  ${field_value}
+
 
 Додати предмет закупівлі
   [Arguments]  ${username}  ${tender_uaid}  ${item}

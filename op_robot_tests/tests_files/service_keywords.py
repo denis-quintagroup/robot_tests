@@ -47,7 +47,9 @@ from .initial_data import (
     create_fake_description,
     create_fake_scheme_id,
     create_fake_bankName,
-    test_tender_data_insider
+    test_tender_data_insider,
+    create_fake_scheme_id_test,
+    create_fake_items_quantity
 )
 from barbecue import chef
 from restkit import request

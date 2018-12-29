@@ -151,6 +151,14 @@ def create_fake_url():
     return '{0}/{1}x{2}/{3}/{4}.png'.format(base, size_x, size_y, background_color, font_color)
 
 
+def create_fake_scheme_id_test():
+    return fake.scheme_other()
+
+
+def create_fake_items_quantity():
+    return round(random.uniform(5, 10), 0)
+
+
 def test_tender_data(params, periods=("enquiry", "tender")):
     now = get_now()
     value_amount = create_fake_amount(3000, 999999999.99)  # max value equals to budget of Ukraine in hryvnias
@@ -207,7 +215,7 @@ def test_tender_data(params, periods=("enquiry", "tender")):
     for period_name in periods:
         period_dict[period_name + "Period"] = {}
         for i, j in zip(range(2), ("start", "end")):
-            inc_dt += timedelta(minutes=params['intervals'][period_name][i])
+            inc_dt += timedelta(days=params['intervals'][period_name][i])
             period_dict[period_name + "Period"][j + "Date"] = inc_dt.isoformat()
     data.update(period_dict)
 
@@ -224,8 +232,8 @@ def test_question_data():
     })
 
 
-def test_related_question(question, relation, obj_id):
-    question.data.update({"questionOf": relation, "relatedItem": obj_id})
+def test_related_question(question, tender, obj_id):
+    question.data.update({"questionOf": tender, "relatedItem": obj_id})
     return munchify(question)
 
 
@@ -320,7 +328,7 @@ def test_tender_data_dgf_other(params):
     period_dict = {}
     inc_dt = get_now()
     period_dict["auctionPeriod"] = {}
-    inc_dt += timedelta(minutes=params['intervals']['auction'][0])
+    inc_dt += timedelta(days=params['intervals']['auction'][0])
     period_dict["auctionPeriod"]["startDate"] = inc_dt.isoformat()
     data.update(period_dict)
 
@@ -367,13 +375,13 @@ def test_tender_data_insider(params):
     url = params['api_host_url']
 
     # TODO: handle this magic string
-    if url == 'https://lb.api.ea.openprocurement.org':
-        del data['procurementMethodDetails']
+    #if url == 'https://lb.api.ea.openprocurement.org':
+    del data['procurementMethodDetails']
 
     period_dict = {}
     inc_dt = get_now()
     period_dict["auctionPeriod"] = {}
-    inc_dt += timedelta(minutes=params['intervals']['auction'][0])
+    inc_dt += timedelta(days=params['intervals']['auction'][0])
     period_dict["auctionPeriod"]["startDate"] = inc_dt.isoformat()
     data.update(period_dict)
 

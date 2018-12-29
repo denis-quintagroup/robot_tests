@@ -680,7 +680,9 @@ ${ITEM_MEAT}        ${True}
   ...      modify_item
   [Setup]  Дочекатись синхронізації з майданчиком  ${tender_owner}
   [Teardown]  Оновити LAST_MODIFICATION_DATE
-  Можливість змінити поле quantity предмета на 1278127
+  ${quantity}=  create_fake_items_quantity
+  Set To Dictionary  ${USERS.users['${tender_owner}']}  quantity=${quantity}
+  Можливість змінити поле quantity предмета на ${quantity}
 
 
 Відображення зміненої кількості одиниць виміру активу об’єкта МП
@@ -689,8 +691,8 @@ ${ITEM_MEAT}        ${True}
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
   ...      modify_item
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}
-  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data['items'][0]}  quantity
-  Звірити відображення поля items[0].quantity тендера із 1278127 для користувача ${viewer}
+  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${viewer}'].tender_data.data['items'][0]}  quantity
+  Звірити відображення поля quantity зміненого предмета із ${USERS.users['${tender_owner}'].quantity} для користувача ${viewer}
 
 
 Можливість внести зміни до ідентифікатора класифікації активу об’єкта МП
@@ -700,7 +702,10 @@ ${ITEM_MEAT}        ${True}
   ...      modify_item
   [Setup]  Дочекатись синхронізації з майданчиком  ${tender_owner}
   [Teardown]  Оновити LAST_MODIFICATION_DATE
-  Можливість змінити поле classification.id предмета на 98910000-5
+  ${scheme_id}=  Run As  ${tender_owner}  Отримати інформацію із об'єкта МП  ${TENDER['TENDER_UAID']}  items[0].classification.id
+  ${new_id}=  create_fake_scheme_id_test
+  Set To Dictionary  ${USERS.users['${tender_owner}']}  new_id=${new_id}
+  Можливість змінити поле classification.id предмета на ${new_id}
 
 
 Відображення зміненого ідентифікатора класифікації активу об’єкта МП
@@ -709,8 +714,8 @@ ${ITEM_MEAT}        ${True}
   ...      ${USERS.users['${viewer}'].broker}  ${USERS.users['${tender_owner}'].broker}
   ...      modify_item
   :FOR  ${username}  IN  ${viewer}  ${tender_owner}
-  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${username}'].tender_data.data['items'][0].classification}  id
-  Звірити відображення поля items[0].classification.id тендера із 98910000-5 для користувача ${viewer}
+  \  Run Keyword And Ignore Error  Remove From Dictionary  ${USERS.users['${viewer}'].tender_data.data['items'][0].classification}  id
+  Звірити відображення поля classification.id зміненого предмета із ${USERS.users['${tender_owner}'].new_id} для користувача ${viewer}
 
 
 Можливість внести зміни до назви одиниці виміру активу об’єкта МП

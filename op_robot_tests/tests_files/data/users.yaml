@@ -2,8 +2,7 @@ users:
     Tender_Owner:
         auth_ds:
             tenders:  [test.quintagroup.com, test.quintagroup.com]
-            auctions: [test.quintagroup.com, 30852434db2e4574b57d37bda228ed2e]
-        api_key:  b7cde44f6279430d89a1a40d52af864c
+            auctions: [test.quintagroup.com, 7cf1db70fb75408296fdc46e7f4f9fda]
         broker:   Quinta
         browser:  chrome
         position: [0, 0]
@@ -11,8 +10,7 @@ users:
     Tender_User:
         auth_ds:
             tenders:  [test.quintagroup.com, test.quintagroup.com]
-            auctions: [test.quintagroup.com, 30852434db2e4574b57d37bda228ed2e]
-        api_key:  b7cde44f6279430d89a1a40d52af864c
+            auctions: [test.quintagroup.com, 7cf1db70fb75408296fdc46e7f4f9fda]
         broker:   Quinta
         browser:  chrome
         position: [0, 0]
@@ -20,8 +18,7 @@ users:
     Tender_User1:
         auth_ds:
             tenders:  [test.quintagroup.com, test.quintagroup.com]
-            auctions: [test.quintagroup.com, 30852434db2e4574b57d37bda228ed2e]
-        api_key:  b7cde44f6279430d89a1a40d52af864c
+            auctions: [test.quintagroup.com, 7cf1db70fb75408296fdc46e7f4f9fda]
         broker:   Quinta
         browser:  chrome
         position: [0, 0]
@@ -29,8 +26,7 @@ users:
     Tender_User2:
         auth_ds:
             tenders:  [test.quintagroup.com, test.quintagroup.com]
-            auctions: [test.quintagroup.com, 30852434db2e4574b57d37bda228ed2e]
-        api_key:  b7cde44f6279430d89a1a40d52af864c
+            auctions: [test.quintagroup.com, 7cf1db70fb75408296fdc46e7f4f9fda]
         broker:   Quinta
         browser:  chrome
         position: [0, 0]
@@ -38,7 +34,7 @@ users:
     Tender_Viewer:
         auth_ds:
             tenders:  [test.quintagroup.com, test.quintagroup.com]
-            auctions: [test.quintagroup.com, 30852434db2e4574b57d37bda228ed2e]
+            auctions: [test.quintagroup.com, 7cf1db70fb75408296fdc46e7f4f9fda]
         api_key:  ""
         broker:   Quinta
         browser:  chrome
